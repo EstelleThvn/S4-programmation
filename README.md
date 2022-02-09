@@ -1,29 +1,35 @@
-# Simple-Cpp-Setup
+# My progress
+Les leçons que j'ai lues
 
-Welcome to this minimalist C++ project!
+## Level 1
 
-## If you use the Dev Container
+### Install a compiler
 
-If you install [ms-vscode-remote.remote-containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) and [Docker](https://www.docker.com/products/docker-desktop), you will be able to run your code inside a Linux container (kind of like a virtual machine, but faster). Also, you will get static analyzers, code formatters and useful extensions installed out of the box! It is a great option to get started with C++ quickly.
+### Use an IDE
+- Rename Symbol -> F2 très pratique !
+- Go to Definition -> F12
+- Go to Symbol -> ctrl+shift+O
+- Go to file -> ctrl+P
+- Switch between .h and .cpp -> alt+O très pratique !
+- Search for word in the whole project -> ctrl+shift+F
 
-(Unfortunately, if you want to do GUI applications they don't work well from within a container and you might have to do a proper setup on your own desktop instead. But for simple command-line applications this works amazingly well!)
+### Use Git
+Faire des commit sous cette forme : 
+```[Partie du code affectée] Add/Update/Fix/... détail du commit```
 
-NB: the container might take a while to build the first time.
+Faire des phrases dans le titre du commit, et pas commit du code qui marche pas
 
-## If you don't use the Dev Container
+Ca rend le repository plus clair !
 
-### Compiling
+### Use a debugger
+Ajouter des breakpoints pour debugger (cliquer à gauche de la ligne ou F9) -> très pratique !
 
-You need to install [CMake](https://cmake.org/download/).
+### Use a formatting tool
+Se fait tout seul au moment du ctrl+s
 
-To use CMake I recommend this VS Code extension : [ms-vscode.cmake-tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools). You will need to setup the extension with a compiler. Here is [the tutorial](https://code.visualstudio.com/docs/cpp/cmake-linux). It is based on Linux but at the bottom of the page you will find the explanations to adapt it for [Windows](https://code.visualstudio.com/docs/cpp/config-msvc) and [Mac](https://code.visualstudio.com/docs/cpp/config-clang-mac).
+-> Trop bien pour avoir du joli code facile à lire
 
-Alternatively you can just create a *build* folder at the root of this project, open a terminal and run `cmake ..`; chances are it will detect what compiler you have installed and generate the appropriate Makefile / Visual Studio solution / Xcode project.
+### Use static analysers
+Clang-tidy et cppCheck
 
-### Auto-formatting
-
-[Check this out](https://julesfouchy.github.io//Learn--Clean-Code-With-Cpp/lessons/formatting-tool) to learn why you would want to use a code formatter and how to do it.
-
-### Static analysis
-
-[Check this out](https://julesfouchy.github.io/Learn--Clean-Code-With-Cpp/lessons/static-analysis-and-sanitizers) to learn why you would want to use static analysis and how to do it.
+-> Trop bien pour repérer les erreurs de code
