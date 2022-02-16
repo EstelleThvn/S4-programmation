@@ -45,6 +45,7 @@ Guidelines :
 
 ### Stack vs Heap
 Stack : int i=3 --> entier
+
 Heap : int* i=3 --> pointeur d'entier
 
 Préférer utiliser le stack
