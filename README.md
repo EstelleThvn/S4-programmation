@@ -60,3 +60,40 @@ Utiliser le heap quand :
 Garder les mêmes conventions tout au long d'un projet
 
 -> pour ce projet : snake_case
+
+
+## Level 2
+
+### Make it work, then make it good
+le plus important c'est que le code marche, après seulement on améliore
+
+### Prefer free functions
+Utiliser les free functions (qui prennent autant de paramètres que nécessaire) plutôt que des méthodes quand les méthodes utilisent que l'interface publique de la classe
+
+### Design cohesive classes
+- Utiliser les structs plutôt qu'une classe si on a pas d'invariants
+- Respecter les principe de Single Responsibility
+- Pas de méthodes privées
+- Pas de méthodes publiques qui utilise que des membres publiques de la classe : dans ce cas ça doit être une free function
+
+### Use structs to group data
+
+### Write small functions
+découper les longues fonctions en fonctions intermédiaires pour améliorer la lisibilité
+
+### DRY: Don't repeat yourself
+Avec boucles, fonctions, templates, structs ou classes
+
+### Enums
+- Utiliser enum class
+- Utiliser using enum avant switch pour pas avoir à remettre le nom de l'enum à chaque fois dans les case du switch
+
+### Split problems in small pieces
+- faire des fonctions et classes simples et courtes
+- diviser les tâches en plus petites tâches
+- peut faire les tâches visuelles en premier pour voir plus facilement les résultats et bugs après
+
+### Composition over Inheritance
+- quand réutilisation du code : préférer fonctions ou composition
+- faire du polymorphisme à la place de l'héritage : polymorphisme statique (templates) et dynamique (std::variant, std::function)
+- utiliser héritage : quand classe mère est abstraite, ou CRTP
