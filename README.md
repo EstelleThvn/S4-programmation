@@ -42,3 +42,20 @@ Guidelines :
 - éviter abbréviations
 - utiliser variables et fonctions pour simplifier compréhension
 - ajouter Out à la fin des variables que l'on modifie
+
+### Stack vs Heap
+Stack : int i=3 --> entier
+Heap : int* i=3 --> pointeur d'entier
+
+Préférer utiliser le stack
+
+pas faire de new : utiliser std::unique_ptr ou std::shared_ptr
+Utiliser le heap quand :
+- objets de tailles variables
+- gros objects
+- polymorphisme
+
+### Consistency in style
+Garder les mêmes conventions tout au long d'un projet
+
+-> pour ce projet : snake_case
