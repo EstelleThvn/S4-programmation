@@ -33,3 +33,12 @@ Se fait tout seul au moment du ctrl+s
 Clang-tidy et cppCheck
 
 -> Trop bien pour repérer les erreurs de code
+
+### Naming
+Noms concis et descriptifs
+
+Guidelines : 
+- booléens sous forme de questions ou affirmation (isTeaFresh())
+- éviter abbréviations
+- utiliser variables et fonctions pour simplifier compréhension
+- ajouter Out à la fin des variables que l'on modifie
