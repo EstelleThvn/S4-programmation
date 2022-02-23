@@ -1,13 +1,7 @@
-#include "main.hpp"
-#include <iostream>
+#include "guess_the_number/play_guess_the_number.hpp"
+#include "hangman/play_hangman.hpp"
 
 int main()
 {
-    std::cout << "Hello World\n";
-    plop();
-
-    int number_of_lives = 3;
-
-    //F9 to place a breakpoint
-    std::cout << "You have " << number_of_lives << " lives\n";
+    //play_guess_the_number();
 }
