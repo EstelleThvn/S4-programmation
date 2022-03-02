@@ -4,4 +4,5 @@
 int main()
 {
     //play_guess_the_number();
+    play_hangman();
 }
