@@ -97,3 +97,15 @@ Avec boucles, fonctions, templates, structs ou classes
 - quand réutilisation du code : préférer fonctions ou composition
 - faire du polymorphisme à la place de l'héritage : polymorphisme statique (templates) et dynamique (std::variant, std::function)
 - utiliser héritage : quand classe mère est abstraite, ou CRTP
+
+
+## Level 3
+
+### std::vector
+Utiliser std:vector comme container !
+
+### Documentation
+- mettre des commentaires au dessus des fonctions
+- donner des exemples d'utilisation pour expliciter l'utilisation d'une fonction ou méthode
+- Doxygen
+- utiliser des readme interne pour les développeurs (dire pourquoi on a choisit cette solution plutôt qu'une autre...)
