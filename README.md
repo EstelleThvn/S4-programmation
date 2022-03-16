@@ -109,3 +109,6 @@ Utiliser std:vector comme container !
 - donner des exemples d'utilisation pour expliciter l'utilisation d'une fonction ou méthode
 - Doxygen
 - utiliser des readme interne pour les développeurs (dire pourquoi on a choisit cette solution plutôt qu'une autre...)
+
+### Use libraries
+lire la documentation des librairies !
