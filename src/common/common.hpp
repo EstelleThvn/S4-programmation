@@ -1,6 +1,7 @@
 #pragma once
 #include <random>
 
+/// Returns a random int number between min included and max included
 template<typename T>
 T pick_random_number(T min, T max)
 {
