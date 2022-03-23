@@ -9,8 +9,6 @@
 void play_hangman()
 {
     HangmanState hangman_party;
-    hangman_party.word_to_guess                = pick_a_word_to_guess();
-    hangman_party.letters_that_have_been_found = initialize_letters_guessed(hangman_party.word_to_guess);
 
     pick_a_word_to_guess();
     while (player_is_alive(hangman_party.number_of_lives) && !player_has_won(hangman_party.letters_that_have_been_found)) {
