@@ -4,6 +4,7 @@
 #include "../common/common.hpp"
 #include "../common/get_input_from_user.h"
 
+//compares the number the user entered with the number randomly chosen by the program
 void compare_user_number_to_correct_answer(int correct_number, int user_number)
 {
     if (correct_number > user_number) {
