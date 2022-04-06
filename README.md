@@ -112,3 +112,7 @@ Utiliser std:vector comme container !
 
 ### Use libraries
 lire la documentation des librairies !
+
+### Git submodules
+- ajouter un submodule à un projet depuis gitKraken (Submodules > plus, ajouter le lien du git)
+- ```git clone --recursive https://github.com/url/to/the/repo``` pour cloner un projet qui utilise un submodule (ne pas le faire depuis gitKraken pour éviter les problèmes)
