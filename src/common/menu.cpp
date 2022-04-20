@@ -5,6 +5,7 @@
 #include <vector>
 #include "../guess_the_number/play_guess_the_number.hpp"
 #include "../hangman/play_hangman.hpp"
+#include "../noughts_and_crosses/play_noughts_and_crosses.hpp"
 #include "get_input_from_user.h"
 
 struct Game {
@@ -51,8 +52,10 @@ void game()
     std::vector<Game> games;
     Game              guess_the_number("guess_the_number", play_guess_the_number);
     Game              hangman("hangman", play_hangman);
+    Game              noughts_and_crosses("Noughts and Crosses", play_noughts_and_crosses);
     games.push_back(guess_the_number);
     games.push_back(hangman);
+    games.push_back(noughts_and_crosses);
 
     bool playing = true;
     while (playing) {
