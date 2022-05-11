@@ -104,20 +104,40 @@ Avec boucles, fonctions, templates, structs ou classes
 ### std::vector
 Utiliser std:vector comme container !
 
+### Minimize dependencies
+- ne passer que l'élément concerné dans une fonction, et pas tout le contexte (par exemple pour une caméra passer juste la matrice et pas la classe caméra entière) --> rend le code moins complexe et simplifie sa réécriture
+- préférer les fonctions libres minimise aussi les dépendences
+
+### Strong Types
+- permet de rajouter des information à un type (par exemple donner un nom en plus à un int)
+- clarifie l'utilisation des types et protège des accidents
+- exemple : une classe point et vecteur -> ont toutes les deux des nombre x et y qui les représentent mais ce ne sont pas les même concepts
+
+### Use libraries
+lire la documentation des librairies !
+
+### Range-based for loops
+Exemple : ```for (auto& x : v) {
+    // ...
+}```
+- --> montre mieux l'intention du code
+- --> garantie aussi qu'on ne change pas l'index dans la boucle comme on pourrait le faire dans une boucle for
+
+### std::optional
+pour avoir des types qui peuvent être nuls, permet de l'indiquer explicitement
+
+Exemple :  ```std::optional<int> oEmpty;```
+
+### Single Source of Truth
+- principe : ne stocker une information qu'une fois dans le code
+- --> évite les problèmes au moment de la réécriture du code
+
 ### Documentation
 - mettre des commentaires au dessus des fonctions
 - donner des exemples d'utilisation pour expliciter l'utilisation d'une fonction ou méthode
 - Doxygen
 - utiliser des readme interne pour les développeurs (dire pourquoi on a choisit cette solution plutôt qu'une autre...)
 
-### Use libraries
-lire la documentation des librairies !
-
 ### Git submodules
 - ajouter un submodule à un projet depuis gitKraken (Submodules > plus, ajouter le lien du git)
 - ```git clone --recursive https://github.com/url/to/the/repo``` pour cloner un projet qui utilise un submodule (ne pas le faire depuis gitKraken pour éviter les problèmes)
-
-### std::optional
-pour avoir des types qui peuvent être nuls, permet de l'indiquer explicitement
-
-Exemple :  ```std::optional<int> oEmpty;```
