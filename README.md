@@ -123,6 +123,10 @@ Exemple : ```for (auto& x : v) {
 - --> montre mieux l'intention du code
 - --> garantie aussi qu'on ne change pas l'index dans la boucle comme on pourrait le faire dans une boucle for
 
+### Master your IDE
+- aller voir et apprendre les raccourcis clavier pour gagner en rapidité
+- sur Internet, ou sur vs code Keyboard Shortcuts (Ctrl+K Ctrl+S)
+
 ### std::optional
 pour avoir des types qui peuvent être nuls, permet de l'indiquer explicitement
 
@@ -138,6 +142,35 @@ Exemple :  ```std::optional<int> oEmpty;```
 - Doxygen
 - utiliser des readme interne pour les développeurs (dire pourquoi on a choisit cette solution plutôt qu'une autre...)
 
+### Don't overfocus on performance
+- préférer la maintenabilité et la lisibilité du code à sa performance (surtout quand la performance n'est pas requise)
+
 ### Git submodules
 - ajouter un submodule à un projet depuis gitKraken (Submodules > plus, ajouter le lien du git)
 - ```git clone --recursive https://github.com/url/to/the/repo``` pour cloner un projet qui utilise un submodule (ne pas le faire depuis gitKraken pour éviter les problèmes)
+
+### assert
+- pour faire des vérifications pendant le développement (assert est enlevé en release mode)
+- assert est fait au moment du run
+- static_assert est fait à la compilation
+
+### auto
+- Lorsque auto rend le code plus lisible, on peut l'utiliser
+- --> évite les redondances dans le code
+
+### Markdown
+- simple, lisible, très utilisé
+```
+*italic text*
+
+**bold text**
+
+[Markdown Cheatsheet link](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+ - A
+ - bullet
+ - point
+ - list
+
+ `inline code`
+```
