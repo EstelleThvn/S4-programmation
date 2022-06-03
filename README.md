@@ -1,5 +1,5 @@
 # My progress
-Les leçons que j'ai lues
+Toutes les leçons que j'ai lues
 
 ## Level 1
 
@@ -72,7 +72,7 @@ Utiliser les free functions (qui prennent autant de paramètres que nécessaire)
 
 ### Design cohesive classes
 - Utiliser les structs plutôt qu'une classe si on a pas d'invariants
-- Respecter les principe de Single Responsibility
+- Respecter les principes de Single Responsibility
 - Pas de méthodes privées
 - Pas de méthodes publiques qui utilise que des membres publiques de la classe : dans ce cas ça doit être une free function
 
@@ -136,6 +136,10 @@ Exemple :  ```std::optional<int> oEmpty;```
 - principe : ne stocker une information qu'une fois dans le code
 - --> évite les problèmes au moment de la réécriture du code
 
+### code reviews
+- principe : demander des retours sur le code par une personne de l'équipe
+- utile pour trouver les bugs, knowledge transfer, augmente responsibilité (devoir écrire une docummentation)
+
 ### Documentation
 - mettre des commentaires au dessus des fonctions
 - donner des exemples d'utilisation pour expliciter l'utilisation d'une fonction ou méthode
@@ -174,3 +178,38 @@ Exemple :  ```std::optional<int> oEmpty;```
 
  `inline code`
 ```
+
+### Smart Pointers
+utiliser `std::unique_ptr<MyClass> x = std::make_unique<MyClass>();` plutôt qu'un pointeur normal
+
+### std::function
+- type qui permet de passer une fonction en paramètre à d'autres fonctions
+- exemple : `std::function<void()> my_function`
+
+### Error Handling
+avec des exceptions : `try { ... } catch { ... throw; }`
+
+### Git Pull Requests
+pour contribuer à un projet open source
+- fork le projet
+- faire une nouvelle branche et faire ses changments dedans
+- faire une pull request et écrire un message sur ce que l'on a modifié
+
+### Advanced Git features
+- amend : fait un commit mais sans le push (bien pour revenir dessus plus tard s'il y a encore des bugs)
+- rebase
+- stash
+
+### The Rule of 5
+- règle : si on crée une special member function dans une classe, cela veut dire que l'on doit faire les 5 (destructor, copy constructor, copy assignment, move constructor, move assignment)
+- Rule of 0 : la plupart des classes ne doivent pas avoir de special member functions explicitement défini, parce qu'elles ne le requiert pas
+
+### State and Strategy
+- state : le changement d'un state est géré par le state lui-même
+vs 
+- strategy : le changement vient de l'extérieur (dépend pas de la stratégie courante)
+
+### std::variant
+- exemple : `std::variant<int, float> my_variant` --> peut contenir un int OU un float 
+- Le type du std::variant peut changer au court du temps entre les type qu'on lui a donné
+- alternative à enum
