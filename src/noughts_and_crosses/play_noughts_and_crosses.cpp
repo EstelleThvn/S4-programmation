@@ -67,15 +67,24 @@ void draw_circle(const float& cell_size, const float& radius, const BoardCell& c
 {
     ctx.fill          = {0, 0, 0, 0};
     ctx.stroke_weight = 0.06f;
-    ctx.circle(find_cell_center(cell_size, cell_index), 0.8f * radius);
+
+    const auto circle_center = p6::Center{find_cell_center(cell_size, cell_index)};
+    const auto circle_radius = 0.8f * radius;
+
+    ctx.circle(circle_center, circle_radius);
 }
 
 void draw_cross(const float& cell_size, const float& radius, const BoardCell& cell_index, p6::Context& ctx)
 {
     ctx.fill          = {0, 0, 0, 0};
     ctx.stroke_weight = 0.06f;
-    ctx.rectangle(p6::Center{find_cell_center(cell_size, cell_index)}, p6::Radii{glm::vec2{.8f, 0.1f} * radius}, p6::Rotation{0.125_turn});
-    ctx.rectangle(p6::Center{find_cell_center(cell_size, cell_index)}, p6::Radii{glm::vec2{.8f, 0.1f} * radius}, p6::Rotation{-0.125_turn});
+
+    const auto rect_center   = p6::Center{find_cell_center(cell_size, cell_index)};
+    const auto rect_radius   = p6::Radii{glm::vec2{.8f, 0.1f} * radius};
+    const auto rect_rotation = p6::Rotation{0.125_turn};
+
+    ctx.rectangle(rect_center, rect_radius, rect_rotation);
+    ctx.rectangle(rect_center, rect_radius, -rect_rotation);
 }
 
 //main function to play the game
