@@ -15,7 +15,7 @@ struct BoardCell {
 //draws a single cell
 void draw_cell(const float& cell_size, const float& radius, const BoardCell& cell_index, p6::Context& ctx)
 {
-    ctx.square(p6::TopLeftCorner{-ctx.aspect_ratio() + static_cast<float>(cell_index._x) * cell_size, 1.f - static_cast<float>(cell_index._y) * cell_size}, radius);
+    ctx.square(p6::TopLeftCorner{-1.f + static_cast<float>(cell_index._x) * cell_size, 1.f - static_cast<float>(cell_index._y) * cell_size}, radius);
 }
 
 //draws the grid of the game
