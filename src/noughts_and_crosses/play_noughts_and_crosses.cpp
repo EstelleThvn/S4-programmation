@@ -57,6 +57,27 @@ std::optional<BoardCell> cell_is_hovered(glm::vec2 mouse_pos, const int& board_s
     }
 }
 
+//returns the center of a cell from its index
+glm::vec2 find_cell_center(const float& cell_size, const BoardCell& cell_index)
+{
+    return glm::vec2(-1.f + cell_size / 2 + cell_index._x * cell_size, 1.f - cell_size / 2 - cell_index._y * cell_size);
+}
+
+void draw_circle(const float& cell_size, const float& radius, const BoardCell& cell_index, p6::Context& ctx)
+{
+    ctx.fill          = {0, 0, 0, 0};
+    ctx.stroke_weight = 0.06f;
+    ctx.circle(find_cell_center(cell_size, cell_index), 0.8f * radius);
+}
+
+void draw_cross(const float& cell_size, const float& radius, const BoardCell& cell_index, p6::Context& ctx)
+{
+    ctx.fill          = {0, 0, 0, 0};
+    ctx.stroke_weight = 0.06f;
+    ctx.rectangle(p6::Center{find_cell_center(cell_size, cell_index)}, p6::Radii{glm::vec2{.8f, 0.1f} * radius}, p6::Rotation{0.125_turn});
+    ctx.rectangle(p6::Center{find_cell_center(cell_size, cell_index)}, p6::Radii{glm::vec2{.8f, 0.1f} * radius}, p6::Rotation{-0.125_turn});
+}
+
 //main function to play the game
 void play_noughts_and_crosses()
 {
@@ -74,8 +95,10 @@ void play_noughts_and_crosses()
         const auto hovered_cell = cell_is_hovered(ctx.mouse(), board_size);
 
         if (hovered_cell.has_value()) {
-            ctx.fill = {0.f, 1.f, 1.f, 1.f};
+            ctx.fill = {0.1f, 0.f, 0.2f, .24f};
             draw_cell(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx);
+            draw_circle(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx);
+            draw_cross(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx);
         }
     };
 
