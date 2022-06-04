@@ -213,3 +213,6 @@ vs
 - exemple : `std::variant<int, float> my_variant` --> peut contenir un int OU un float 
 - Le type du std::variant peut changer au court du temps entre les type qu'on lui a donné
 - alternative à enum
+
+### Space out your code
+- ne pas hésiter à faire des retours à la lignes pour avoir les paramètres d'une fonctions les uns en dessous des autres --> plus lisible
