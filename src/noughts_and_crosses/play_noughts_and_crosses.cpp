@@ -38,7 +38,9 @@ private:
 //draws a single cell
 void draw_cell(const float& cell_size, const float& radius, const BoardCell& cell_index, p6::Context& ctx)
 {
-    ctx.square(p6::TopLeftCorner{-1.f + static_cast<float>(cell_index._x) * cell_size, 1.f - static_cast<float>(cell_index._y) * cell_size}, radius);
+    ctx.square(p6::TopLeftCorner{-1.f + static_cast<float>(cell_index._x) * cell_size,
+                                 1.f - static_cast<float>(cell_index._y) * cell_size},
+               radius);
 }
 
 //draws the grid of the game
@@ -108,7 +110,9 @@ void draw_cross(const float& cell_size, const float& radius, const BoardCell& ce
     const auto rect_radius   = p6::Radii{glm::vec2{.8f, 0.1f} * radius};
     const auto rect_rotation = p6::Rotation{0.125_turn};
 
-    ctx.rectangle(rect_center, rect_radius, rect_rotation);
+    ctx.rectangle(rect_center,
+                  rect_radius,
+                  rect_rotation);
     ctx.rectangle(rect_center, rect_radius, -rect_rotation);
 }
 
@@ -118,10 +122,14 @@ void draw_hovered_cell(int board_size, p6::Context& ctx, Player& current_player)
 
     if (hovered_cell.has_value()) {
         ctx.fill = {0.1f, 0.f, 0.2f, .24f};
-        draw_cell(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx);
+        draw_cell(2 / static_cast<float>(board_size),
+                  1 / static_cast<float>(board_size),
+                  *hovered_cell, ctx);
 
         //show a cross or a circle depending on the current player
-        (current_player == Player::Crosses) ? draw_cross(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx) : draw_circle(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx);
+        (current_player == Player::Crosses)
+            ? draw_cross(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx)
+            : draw_circle(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx);
     }
 }
 
@@ -134,7 +142,10 @@ void draw_noughts_and_crosses(const Board<size>& board, p6::Context& ctx)
             const auto board_cell = board[{x, y}];
             if (board_cell.has_value()) {
                 if (*board_cell == Player::Noughts) {
-                    draw_circle(2 / static_cast<float>(size), 1 / static_cast<float>(size), BoardCell(x, y), ctx);
+                    draw_circle(2 / static_cast<float>(size),
+                                1 / static_cast<float>(size),
+                                BoardCell(x, y),
+                                ctx);
                 }
                 else {
                     draw_cross(2 / static_cast<float>(size), 1 / static_cast<float>(size), BoardCell(x, y), ctx);
@@ -147,7 +158,9 @@ void draw_noughts_and_crosses(const Board<size>& board, p6::Context& ctx)
 //swap the payer once one has clicked on a cell
 void swap_player(Player& current_player)
 {
-    current_player = (current_player == Player::Crosses) ? Player::Noughts : Player::Crosses;
+    current_player = (current_player == Player::Crosses)
+                         ? Player::Noughts
+                         : Player::Crosses;
 }
 
 //check if the game is finished because the board is complete
@@ -165,7 +178,9 @@ bool board_is_complete(const Board<board_size>& board)
         }
     }
 
-    game_is_finished = (number_of_taken_cells == board_size * board_size) ? true : false;
+    game_is_finished = (number_of_taken_cells == board_size * board_size)
+                           ? true
+                           : false;
 
     if (game_is_finished) {
         std::cout << "No one wins! the board is full" << std::endl;
@@ -179,7 +194,9 @@ std::string player_type_name(Player& current_player)
 {
     std::string name = "";
 
-    name = (current_player == Player::Noughts) ? "Noughts" : "Crosses";
+    name = (current_player == Player::Noughts)
+               ? "Noughts"
+               : "Crosses";
 
     return name;
 }
@@ -192,7 +209,8 @@ bool line_is_complete(const Board<board_size>& board, Player& current_player, gl
 {
     bool complete_line = true;
     for (int i = 0; i < board_size && complete_line; i++) {
-        if (board[{i * static_cast<int>(direction.x) + static_cast<int>(direction.y) * incrementation, i * static_cast<int>(direction.y) + static_cast<int>(direction.x) * incrementation}] != current_player) {
+        if (board[{i * static_cast<int>(direction.x) + static_cast<int>(direction.y) * incrementation,
+                   i * static_cast<int>(direction.y) + static_cast<int>(direction.x) * incrementation}] != current_player) {
             complete_line = false;
         }
     }
