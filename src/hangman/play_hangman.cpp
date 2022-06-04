@@ -8,7 +8,7 @@
 #include "../common/get_input_from_user.h"
 
 //**********************************************************************//
-//*********************** Function declarations ************************//
+//**************************** Declarations ****************************//
 //**********************************************************************//
 
 std::string       pick_a_word_to_guess();
@@ -37,7 +37,10 @@ void show_defeat_message();
 void show_answer_message(const std::string& word_to_guess);
 
 //**********************************************************************//
+//**********************************************************************//
+//**********************************************************************//
 
+//main function to play the game
 void play_hangman()
 {
     HangmanState hangman_party;
@@ -63,6 +66,7 @@ void play_hangman()
     show_answer_message(hangman_party.word_to_guess);
 }
 
+//selects a random word that the player will have to guess, from a lsit of words
 std::string pick_a_word_to_guess()
 {
     const std::array words = {"code", "crous", "imac", "opengl"};
@@ -75,6 +79,7 @@ std::vector<bool> initialize_letters_guessed(const std::string& word_to_guess)
     return std::vector<bool>(word_to_guess.size(), false);
 }
 
+//displays the number of lives the player has left
 void show_number_of_lives(int number_of_lives)
 {
     std::cout << "You have " << number_of_lives << " lives" << std::endl;

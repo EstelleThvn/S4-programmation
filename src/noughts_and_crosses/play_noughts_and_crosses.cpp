@@ -3,6 +3,10 @@
 #include <iostream>
 #include <string>
 
+//**********************************************************************//
+//**************************** Declarations ****************************//
+//**********************************************************************//
+
 struct BoardCell {
     int _x;
     int _y;
@@ -34,6 +38,71 @@ public:
 private:
     std::array<std::array<std::optional<Player>, size>, size> _cells;
 };
+
+void                     draw_cell(const float& cell_size, const float& radius, const BoardCell& cell_index, p6::Context& ctx);
+void                     draw_board(int size, p6::Context& ctx);
+BoardCell                transform_mouse_pos_to_cell_index(glm::vec2 mouse_pos, const int& board_size);
+std::optional<BoardCell> cell_is_hovered(glm::vec2 mouse_pos, const int& board_size);
+glm::vec2                find_cell_center(const float& cell_size, const BoardCell& cell_index);
+void                     draw_circle(const float& cell_size, const float& radius, const BoardCell& cell_index, p6::Context& ctx);
+void                     draw_cross(const float& cell_size, const float& radius, const BoardCell& cell_index, p6::Context& ctx);
+void                     draw_hovered_cell(int board_size, p6::Context& ctx, Player& current_player);
+template<int size>
+void draw_noughts_and_crosses(const Board<size>& board, p6::Context& ctx);
+void swap_player(Player& current_player);
+template<int board_size>
+bool        board_is_complete(const Board<board_size>& board);
+std::string player_type_name(Player& current_player);
+template<int board_size>
+bool line_is_complete(const Board<board_size>& board, Player& current_player, glm::vec2 direction, int incrementation);
+template<int board_size>
+bool diagonal_2_line_is_complete(const Board<board_size>& board, Player& current_player);
+void display_winning_player(Player& winning_player);
+template<int board_size>
+bool player_has_won(const Board<board_size>& board, Player& current_player);
+
+//**********************************************************************//
+//**********************************************************************//
+//**********************************************************************//
+
+//main function to play the game
+void play_noughts_and_crosses()
+{
+    auto ctx = p6::Context{{1080, 1080, "NOUGHTS AND CROSSES"}};
+
+    static const int board_size     = 3;
+    auto             board          = Board<board_size>{};
+    auto             current_player = Player::Crosses;
+
+    ctx.update = [&]() {
+        ctx.background({0.1, 0., 0.2});
+        ctx.stroke        = {0.1, 0., 0.2};
+        ctx.stroke_weight = 0.02f;
+        ctx.fill          = {.25, .22, .32};
+
+        draw_board(board_size, ctx);
+        draw_hovered_cell(board_size, ctx, current_player);
+        draw_noughts_and_crosses(board, ctx);
+    };
+
+    //when the player clicks on a cell
+    ctx.mouse_pressed = [&](p6::MouseButton event) {
+        const auto pressed_cell = cell_is_hovered(event.position, board_size);
+
+        if (!board[*pressed_cell].has_value()) {
+            board[*pressed_cell] = current_player;
+
+            //stops the game if the game is now finished
+            if (player_has_won(board, current_player) || board_is_complete(board)) {
+                ctx.stop();
+            }
+
+            swap_player(current_player);
+        }
+    };
+
+    ctx.start();
+}
 
 //draws a single cell
 void draw_cell(const float& cell_size, const float& radius, const BoardCell& cell_index, p6::Context& ctx)
@@ -116,6 +185,7 @@ void draw_cross(const float& cell_size, const float& radius, const BoardCell& ce
     ctx.rectangle(rect_center, rect_radius, -rect_rotation);
 }
 
+//draws the hovered cell if there is one hovered
 void draw_hovered_cell(int board_size, p6::Context& ctx, Player& current_player)
 {
     const auto hovered_cell = cell_is_hovered(ctx.mouse(), board_size);
@@ -183,7 +253,7 @@ bool board_is_complete(const Board<board_size>& board)
                            : false;
 
     if (game_is_finished) {
-        std::cout << "No one wins! the board is full" << std::endl;
+        std::cout << "No one wins! The board is full" << std::endl;
     }
 
     return game_is_finished;
@@ -201,8 +271,8 @@ std::string player_type_name(Player& current_player)
     return name;
 }
 
-//check if a line is complete with the same symbol
-//direction establishes if we look for a column, row or diagonal
+//checks if a line is complete with the same symbol
+//direction establishes if we look for a column, a row or the diagonal from top left to bottom right
 //incremantation is for which row or column
 template<int board_size>
 bool line_is_complete(const Board<board_size>& board, Player& current_player, glm::vec2 direction, int incrementation)
@@ -218,6 +288,7 @@ bool line_is_complete(const Board<board_size>& board, Player& current_player, gl
     return complete_line;
 }
 
+//diagonal from top right to bottom left
 template<int board_size>
 bool diagonal_2_line_is_complete(const Board<board_size>& board, Player& current_player)
 {
@@ -231,7 +302,13 @@ bool diagonal_2_line_is_complete(const Board<board_size>& board, Player& current
     return complete_line;
 }
 
-//checks if the player who put a cross or a nought on the board won
+void display_winning_player(Player& winning_player)
+{
+    std::cout << player_type_name(winning_player)
+              << " player won the game!" << std::endl;
+}
+
+//checks if the last current player won (the player who just put a symbol on the board)
 template<int board_size>
 bool player_has_won(const Board<board_size>& board, Player& current_player)
 {
@@ -258,48 +335,8 @@ bool player_has_won(const Board<board_size>& board, Player& current_player)
     }
 
     if (player_has_won) {
-        std::cout << player_type_name(current_player)
-                  << " player won the game!" << std::endl;
+        display_winning_player(current_player);
     }
 
     return player_has_won;
-}
-
-//main function to play the game
-void play_noughts_and_crosses()
-{
-    auto ctx = p6::Context{{1080, 1080, "NOUGHTS AND CROSSES"}};
-
-    static const int board_size     = 3;
-    auto             board          = Board<board_size>{};
-    auto             current_player = Player::Crosses;
-
-    ctx.update = [&]() {
-        ctx.background({0.1, 0., 0.2});
-        ctx.stroke        = {0.1, 0., 0.2};
-        ctx.stroke_weight = 0.02f;
-        ctx.fill          = {.25, .22, .32};
-
-        draw_board(board_size, ctx);
-        draw_hovered_cell(board_size, ctx, current_player);
-        draw_noughts_and_crosses(board, ctx);
-    };
-
-    //when the player clicks on a cell
-    ctx.mouse_pressed = [&](p6::MouseButton event) {
-        const auto pressed_cell = cell_is_hovered(event.position, board_size);
-
-        if (!board[*pressed_cell].has_value()) {
-            board[*pressed_cell] = current_player;
-
-            //stops the game if the game is now finished
-            if (player_has_won(board, current_player) || board_is_complete(board)) {
-                ctx.stop();
-            }
-
-            swap_player(current_player);
-        }
-    };
-
-    ctx.start();
 }
