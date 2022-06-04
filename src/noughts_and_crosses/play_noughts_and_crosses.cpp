@@ -112,6 +112,19 @@ void draw_cross(const float& cell_size, const float& radius, const BoardCell& ce
     ctx.rectangle(rect_center, rect_radius, -rect_rotation);
 }
 
+void draw_hovered_cell(int board_size, p6::Context& ctx, Player& current_player)
+{
+    const auto hovered_cell = cell_is_hovered(ctx.mouse(), board_size);
+
+    if (hovered_cell.has_value()) {
+        ctx.fill = {0.1f, 0.f, 0.2f, .24f};
+        draw_cell(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx);
+
+        //show a cross or a circle depending on the current player
+        (current_player == Player::Crosses) ? draw_cross(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx) : draw_circle(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx);
+    }
+}
+
 //draws the noughts and crosses that have already been placed on the board
 template<int size>
 void draw_noughts_and_crosses(const Board<size>& board, p6::Context& ctx)
@@ -250,17 +263,7 @@ void play_noughts_and_crosses()
         ctx.fill          = {.25, .22, .32};
 
         draw_board(board_size, ctx);
-
-        const auto hovered_cell = cell_is_hovered(ctx.mouse(), board_size);
-
-        if (hovered_cell.has_value()) {
-            ctx.fill = {0.1f, 0.f, 0.2f, .24f};
-            draw_cell(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx);
-
-            //show a cross or a circle depending on the current player
-            (current_player == Player::Crosses) ? draw_cross(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx) : draw_circle(2 / static_cast<float>(board_size), 1 / static_cast<float>(board_size), *hovered_cell, ctx);
-        }
-
+        draw_hovered_cell(board_size, ctx, current_player);
         draw_noughts_and_crosses(board, ctx);
     };
 
